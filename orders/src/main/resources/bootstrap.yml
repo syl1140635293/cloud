@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    config:
+      name: application-orders # 定义要读取的资源文件的名称
+      profile: default # 定义profile的 名称
+      label: master # 定义配置文件所在的分支
+      username: admin # 连接的用户名
+      password: enjoy # 连接的密码
+      discovery:
+        enabled: true   # 通过配置中心加载配置文件
+        service-id: config   # 在eureka之中注册的服务ID
+eureka:
+  client:
+    service-url:
+      # 配置eureka服务器地址
+      register-with-eureka: true
+      # 填写注册中心服务器地址
+      defaultZone: http://admin:admin@192.168.0.222:9091/eureka,http://admin:admin@192.168.0.222:9092/eureka,http://admin:admin@192.168.0.222:9093/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.hostname}:${server.port}
+    hostname: orders

@@ -1,0 +1,21 @@
+spring:
+  application:
+    # 服务名称 - 服务之间使用名称进行通讯
+    name: orders
+#tx-lcn:
+#  client:
+#    manager-address: 127.0.0.1:8070
+#    chain-level: 3
+#  logger:
+#    enabled: true
+#    driver-class-name: ${spring.datasource.driver-class-name}
+#    jdbc-url: ${spring.datasource.url}
+#    username: ${spring.datasource.username}
+#    password: ${spring.datasource.password}
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070   #指定TM地址
+  ribbon:
+    loadbalancer:
+      dtx:
+        enabled: true                    #开启启动LCN负载均衡策略

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syl.customer.dao.CustomerDao" >
+  <resultMap id="BaseResultMap" type="com.syl.model.customer.Customer" >
+    <id column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="total_order" property="totalOrder" jdbcType="INTEGER" />
+    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_id, customer_name, sex, phone, password, total_order, total_money, integral, 
+    province, city, area, area_code, state, create_time, update_time, delete_time, is_delete
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="com.syl.model.customer.Customer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    <where>
+      <if test="customerName != null" >
+        AND customer_name = #{customerName,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != null" >
+        AND sex = #{sex,jdbcType=INTEGER}
+      </if>
+      <if test="phone != null" >
+        AND phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="province != null" >
+        AND province = #{province,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null" >
+        AND city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="area != null" >
+        AND area = #{area,jdbcType=VARCHAR}
+      </if>
+      <if test="areaCode != null" >
+        AND area_code = #{areaCode,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null" >
+        AND state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="isDelete != null" >
+        AND is_delete = #{isDelete,jdbcType=INTEGER}
+      </if>
+      <if test="customerId != null" >
+        AND customer_id = #{customerId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.syl.model.customer.Customer" >
+    insert into customer (customer_id, customer_name, sex, 
+      phone, password, total_order, 
+      total_money, integral, province, 
+      city, area, area_code, 
+      state, create_time, update_time, 
+      delete_time, is_delete)
+    values (#{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{totalOrder,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=DECIMAL}, #{integral,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleteTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <update id="update" parameterType="com.syl.model.customer.Customer" >
+    update customer
+    <set >
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOrder != null" >
+        total_order = #{totalOrder,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+</mapper>

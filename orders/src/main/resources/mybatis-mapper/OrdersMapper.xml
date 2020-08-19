@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syl.orders.dao.OrdersDao" >
+  <resultMap id="BaseResultMap" type="com.syl.model.orders.Orders" >
+    <id column="orders_id" property="ordersId" jdbcType="BIGINT" />
+    <result column="orders_code" property="ordersCode" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="goods_count" property="goodsCount" jdbcType="INTEGER" />
+    <result column="goods_total_price" property="goodsTotalPrice" jdbcType="DECIMAL" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="is_discount" property="isDiscount" jdbcType="INTEGER" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orders_id, orders_code, customer_id, customer_name, goods_count, goods_total_price, 
+    total_price, is_pay, is_discount, discount, state, create_time, update_time, delete_time, 
+    is_delete,  remarks
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="com.syl.model.orders.Orders" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    <where>
+      <if test="ordersId != null" >
+        AND orders_id = #{ordersId,jdbcType=BIGINT}
+      </if>
+      <if test="ordersCode != null" >
+        AND orders_code = #{ordersCode,jdbcType=VARCHAR}
+      </if>
+      <if test="customerId != null" >
+        AND customer_id = #{customerId,jdbcType=BIGINT}
+      </if>
+      <if test="isPay != null" >
+        AND is_pay = #{isPay,jdbcType=INTEGER}
+      </if>
+      <if test="isDiscount != null" >
+        AND is_discount = #{isDiscount,jdbcType=INTEGER}
+      </if>
+      <if test="state != null" >
+        AND state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="isDelete != null" >
+        AND is_delete = #{isDelete,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.syl.model.orders.Orders" >
+    insert into orders (orders_id, orders_code, customer_id, 
+      customer_name, goods_count, goods_total_price, 
+      total_price, is_pay, is_discount, 
+      discount, state, create_time, 
+      update_time, delete_time, is_delete, 
+      remarks)
+    values (#{ordersId,jdbcType=BIGINT}, #{ordersCode,jdbcType=VARCHAR}, #{customerId,jdbcType=BIGINT}, 
+      #{customerName,jdbcType=VARCHAR}, #{goodsCount,jdbcType=INTEGER}, #{goodsTotalPrice,jdbcType=DECIMAL}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{isPay,jdbcType=INTEGER}, #{isDiscount,jdbcType=INTEGER}, 
+      #{discount,jdbcType=DECIMAL}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="update" parameterType="com.syl.model.orders.Orders" >
+    update orders
+    <set >
+      <if test="ordersCode != null" >
+        orders_code = #{ordersCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCount != null" >
+        goods_count = #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTotalPrice != null" >
+        goods_total_price = #{goodsTotalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="isDiscount != null" >
+        is_discount = #{isDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where orders_id = #{ordersId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,13 @@
+server:
+  port: 10001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      # 填写注册中心服务器地址
+      defaultZone: http://admin:admin@eureka1:9091/eureka1,http://admin:admin@eureka2:9092/eureka,http://admin:admin@eureka3:9093/eureka

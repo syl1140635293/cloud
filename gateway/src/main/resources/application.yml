@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.221:3306/cloud?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 5000
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: orders
+#          uri: lb://orders
+#          predicates:
+#            - Path=/orders/*
+#        - id: goods
+#          uri: lb://goods
+#          predicates:
+#            - Path=/goods/*
+#        - id: customer
+#          uri: lb://customer
+#          predicates:
+#            - Path=/customer/*
+#      discovery:
+#        locator:
+#          enabled: true
+  #开启端点
+
+
+mybatis:
+  mapper-locations: classpath:mybatis-mapper/*.xml
+server:
+  # 服务端口号
+  port: 8089
+eureka:
+  client:
+    service-url:
+      # 配置eureka服务器地址
+      register-with-eureka: true
+      # 填写注册中心服务器地址
+      defaultZone: http://admin:admin@192.168.0.222:9091/eureka,http://admin:admin@192.168.0.222:9092/eureka,http://admin:admin@192.168.0.222:9093/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.hostname}:${server.port}
+    hostname: gateway
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  database: 0
+  pool:
+    max-idle: 8
+    min-idle: 0
+    max-active: 8
+    max-wait: -1
+logging:
+  path: D://ideaProject/log
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,20 @@
+server:
+  port: 7071
+spring:
+  application:
+    name: config
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/syl1140635293/cloud-config.git
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      # 填写注册中心服务器地址
+      defaultZone: http://admin:admin@192.168.0.222:9091/eureka,http://admin:admin@192.168.0.222:9092/eureka,http://admin:admin@192.168.0.222:9093/eureka
+      instance: # eureak实例定义
+        hostname: config # 定义 Eureka 实例所在的主机名称

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syl.goods.dao.GoodsDao" >
+  <resultMap id="BaseResultMap" type="com.syl.model.goods.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="goods_stock" property="goodsStock" jdbcType="INTEGER" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
+    <result column="goods_code" property="goodsCode" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    <result column="is_seckill" property="isSeckill" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_id, goods_name, goods_price, goods_stock, goods_img, goods_unit, goods_code, 
+    state, is_seckill,remarks, create_time, update_time, delete_time, is_delete, version
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="com.syl.model.goods.Goods" >
+    select
+    <include refid="Base_Column_List" />
+    from goods
+    <where>
+      <if test="goodsId != null" >
+        AND goods_id = #{goodsId,jdbcType=BIGINT}
+      </if>
+      <if test="goodsName != null" >
+        AND goods_name = #{goodsName,jdbcType=VARCHAR}
+      </if>
+      <if test="goodsCode != null" >
+        AND goods_code = #{goodsCode,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null" >
+        AND state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="isSeckill != null" >
+        AND is_seckill = #{isSeckill,jdbcType=INTEGER}
+      </if>
+      <if test="isDelete != null" >
+        AND is_delete = #{isDelete,jdbcType=INTEGER}
+      </if>
+      <if test="version != null" >
+        AND version = #{version,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.syl.model.goods.Goods" >
+    insert into goods (goods_id, goods_name, goods_price, 
+      goods_stock, goods_img, goods_unit, 
+      goods_code, state, is_seckill, remarks,
+      create_time, update_time, delete_time, 
+      is_delete, version
+      )
+    values (#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, 
+      #{goodsStock,jdbcType=INTEGER}, #{goodsImg,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, 
+      #{goodsCode,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{isSeckill,jdbcType=INTEGER},#{remarks,jdbcType=VARCHAR}
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="update" parameterType="com.syl.model.goods.Goods" >
+    update goods
+    <set >
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsStock != null" >
+        goods_stock = #{goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="goodsImg != null" >
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUnit != null" >
+        goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCode != null" >
+        goods_code = #{goodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isSeckill != null" >
+        is_seckill = #{isSeckill,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARHCAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>
